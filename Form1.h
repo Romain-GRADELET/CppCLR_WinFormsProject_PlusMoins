@@ -130,6 +130,9 @@ namespace CppCLRWinFormsProject {
 		// Générer un nombre aléatoire entre 0 et 100
 		srand((unsigned)time(NULL));
 		this->number = rand() % 100;
+
+		// Affichage des données en mode debug
+		System::Windows::Forms::MessageBox::Show("Nb = " + this->number);
 	}
 };
 }
