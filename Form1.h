@@ -42,6 +42,7 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::TextBox^ textBox1;
 
 	private: int number;
+	private: System::Windows::Forms::Button^ button2;
 
 	protected:
 
@@ -62,6 +63,7 @@ namespace CppCLRWinFormsProject {
 			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -86,9 +88,9 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(226, 33);
+			this->button1->Location = System::Drawing::Point(229, 46);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(83, 37);
+			this->button1->Size = System::Drawing::Size(79, 29);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Valider";
 			this->button1->UseVisualStyleBackColor = true;
@@ -98,8 +100,18 @@ namespace CppCLRWinFormsProject {
 			// 
 			this->textBox1->Location = System::Drawing::Point(27, 92);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(282, 20);
+			this->textBox1->Size = System::Drawing::Size(176, 20);
 			this->textBox1->TabIndex = 3;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(229, 87);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(79, 29);
+			this->button2->TabIndex = 2;
+			this->button2->Text = L"Rejouer";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
 			// 
 			// Form1
 			// 
@@ -107,6 +119,7 @@ namespace CppCLRWinFormsProject {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(336, 142);
 			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->numericUpDown1);
 			this->Controls->Add(this->label1);
@@ -124,7 +137,21 @@ namespace CppCLRWinFormsProject {
 
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		int val = (int)this->numericUpDown1->Value;
+		//System::Windows::Forms::MessageBox::Show("Val = " + val);
 
+		if (val > this->number)
+		{
+			this->textBox1->Text = "Le nombre est plus petit !";
+		}
+		else if (val < this->number)
+		{
+			this->textBox1->Text = "Le nombre est plus grand !";
+		}
+		else
+		{
+			this->textBox1->Text = "BRAVO !";
+		}
 	}
 	private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
 		// Générer un nombre aléatoire entre 0 et 100
@@ -133,6 +160,14 @@ namespace CppCLRWinFormsProject {
 
 		// Affichage des données en mode debug
 		System::Windows::Forms::MessageBox::Show("Nb = " + this->number);
+	}
+
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		srand((unsigned)time(NULL));
+		this->number = rand() % 100;
+
+		this->textBox1->Text = "";
+		this->numericUpDown1->Value = 0;
 	}
 };
 }
